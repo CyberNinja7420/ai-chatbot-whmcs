@@ -13,16 +13,9 @@ steps:
     image: php:8.2-cli
     commands:
       - echo "Validating PHP files..."
-      - find . -name "*.php" -exec php -l {} \; 2>&1 | grep -v "No syntax errors" | head -20 || echo "All PHP valid"
-
-  - name: structure-check
-    image: alpine:3.18
-    commands:
-      - echo "Checking WHMCS module structure..."
-      - ls -la
-      - find . -name "*.php" | wc -l | xargs -I {} echo "PHP files: {}"
+      - find . -name "*.php" -exec php -l {} \; 2>&1 | head -20
 
   - name: complete
     image: alpine:3.18
     commands:
-      - echo "AI Chatbot WHMCS - Build ${DRONE_BUILD_NUMBER} complete"
+      - echo "AI Chatbot WHMCS - Build complete"
